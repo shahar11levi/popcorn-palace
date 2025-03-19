@@ -6,7 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 @Entity
-class Movie {
+public class Movie {
     
     private @Id @GeneratedValue Long id;
     private String title;
