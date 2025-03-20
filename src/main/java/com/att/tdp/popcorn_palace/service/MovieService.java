@@ -25,14 +25,18 @@ public class MovieService {
         return movieRepository.save(movie);
     }
 
-    public void deleteMovie(Long id) {
-        if (movieRepository.existsById(id))
-            movieRepository.deleteById(id);
-        else
-            throw new RuntimeException("Movie with id " + id  + " not found");
+    public Movie findByTitle(String movieTitle) {
+        return null;
     }
 
-    public void updateMovie(Movie movie){
+    public void deleteMovie(Movie movie) {
+        if (movieRepository.existsById(movie.getId()))
+            movieRepository.deleteById(movie.getId());
+        else
+            throw new RuntimeException("Movie with id " + movie.getId()  + " not found");
+    }
+
+    public void updateMovie(Movie movie, String movieTitle){
         
     }
 
