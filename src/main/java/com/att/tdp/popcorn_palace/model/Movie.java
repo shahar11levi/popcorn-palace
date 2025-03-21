@@ -24,6 +24,10 @@ public class Movie {
         this.release_year = release_year;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public String getTitle() {
         return title;
     }
