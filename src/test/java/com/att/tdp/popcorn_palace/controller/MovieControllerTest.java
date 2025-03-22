@@ -2,7 +2,6 @@ package com.att.tdp.popcorn_palace.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -65,12 +64,12 @@ public class MovieControllerTest {
         Movie updatedMovie = new Movie("The Godfather", "Crime", 175, 9.1, 1972);
         String updatedMovieJson = new ObjectMapper().writeValueAsString(updatedMovie);
 
-        this.mockMvc.perform(put("/movies/The Godfather")
+        this.mockMvc.perform(post("/movies/update/" + movie.getTitle())
             .contentType("application/json")
             .content(updatedMovieJson))
-            .andExpect(status().isNoContent());
+            .andExpect(status().isOk());
 
-        Movie savedMovie = movieRepository.findByTitle("The Godfather");
+        Movie savedMovie = movieRepository.findByTitle(movie.getTitle());
         assertThat(savedMovie).isNotNull();
         assertThat(savedMovie.getRating()).isEqualTo(9.1);
     }
@@ -81,7 +80,7 @@ public class MovieControllerTest {
         movieRepository.save(movie);
 
         this.mockMvc.perform(delete("/movies/The Godfather"))
-            .andExpect(status().isNoContent());
+            .andExpect(status().isOk());
     }
 
 

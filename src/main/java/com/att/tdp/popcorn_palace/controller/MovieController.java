@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PutMapping;
 
 import com.att.tdp.popcorn_palace.service.MovieService;
 
@@ -37,17 +36,17 @@ public class MovieController {
         return ResponseEntity.ok(movie);
     }
 
-    @PutMapping("/{movieTitle}")
+    @PostMapping("/update/{movieTitle}")
     public ResponseEntity<Void> updateMovie(@RequestBody Movie movie, @PathVariable String movieTitle) {
         movieService.updateMovie(movie, movieTitle);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
 
     }
 
     @DeleteMapping("/{movieTitle}")
     public ResponseEntity<Void> deleteMovie(@PathVariable String movieTitle) {
         movieService.deleteMovie(movieTitle);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 
     
