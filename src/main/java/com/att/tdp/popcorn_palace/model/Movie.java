@@ -7,18 +7,19 @@ import jakarta.persistence.Id;
 @Entity
 public class Movie {
     
-    private @Id @GeneratedValue Long id;
+    private @Id 
+    @GeneratedValue Long id;
     private String title;
-    private String gener;
+    private String genre;
     private int duration;
     private int rating;
     private int release_year;
 
     Movie() {}
 
-    Movie(String title, String gener, int duration, int rating, int release_year){
+    public Movie(String title, String genre, int duration, int rating, int release_year){
         this.title = title;
-        this.gener = gener;
+        this.genre = genre;
         this.duration = duration;
         this.rating = rating;
         this.release_year = release_year;
@@ -36,12 +37,12 @@ public class Movie {
         this.title = title;
     }
 
-    public String getGener() {
-        return gener;
+    public String getGenre() {
+        return genre;
     }
 
-    public void setGener(String gener) {
-        this.gener = gener;
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
     public int getDuration() {

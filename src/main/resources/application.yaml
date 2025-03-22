@@ -1,17 +1,7 @@
-spring:
-  config:
-    activate: 
-      on-profile: dev
----
-
 server:
   port: 8080
 
----
 spring:
-  config:
-    activate: 
-      on-profile: prod
   application:
     name: popcorn-palace
   datasource:
@@ -25,30 +15,6 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
-  sql:
-    init:
-      mode: always
-
----
-spring:
-  config:
-    activate: 
-      on-profile: dev
-  application:
-    name: popcorn-palace
-  datasource:
-    url: jdbc:h2:mem:testdb
-    username: popcorn-palace
-    password: popcorn-palace
-    driverClassName: org.h2.Driver
-  jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-  h2:
-    console:
-      enabled: true
   sql:
     init:
       mode: always

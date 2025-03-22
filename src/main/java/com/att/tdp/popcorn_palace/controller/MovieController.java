@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.att.tdp.popcorn_palace.service.MovieService;
 
 @RestController
-@RequestMapping("/movies/")
+@RequestMapping("/movies")
 public class MovieController {
     @Autowired
     private MovieService movieService;
