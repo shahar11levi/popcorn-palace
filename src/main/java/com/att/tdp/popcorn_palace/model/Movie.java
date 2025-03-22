@@ -1,9 +1,13 @@
 package com.att.tdp.popcorn_palace.model;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Movie {
@@ -17,6 +21,9 @@ public class Movie {
     private int duration;
     private double rating;
     private int release_year;
+
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Showtime> showtimes;
 
     Movie() {}
 
