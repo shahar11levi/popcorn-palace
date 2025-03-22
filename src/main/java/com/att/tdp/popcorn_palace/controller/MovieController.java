@@ -25,6 +25,11 @@ public class MovieController {
         return movieService.getAllMovies();
     }
 
+    @GetMapping("/{movieTitle}")
+    public ResponseEntity<Movie> getMovie(@PathVariable String movieTitle) {
+        return ResponseEntity.ok(movieService.findByTitle(movieTitle));
+    }
+
     @PostMapping
     public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
         return ResponseEntity.ok(movie);
@@ -39,7 +44,7 @@ public class MovieController {
 
     @DeleteMapping("/{movieTitle}")
     public ResponseEntity<Void> deleteMovie(@PathVariable String movieTitle) {
-        movieService.deleteMovie(movieService.findByTitle(movieTitle));
+        movieService.deleteMovie(movieTitle);
         return ResponseEntity.noContent().build();
     }
 
