@@ -1,7 +1,9 @@
 package com.att.tdp.popcorn_palace.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.att.tdp.popcorn_palace.model.Movie;
 import com.att.tdp.popcorn_palace.model.Showtime;
 import com.att.tdp.popcorn_palace.repository.ShowtimeRepository;
 
@@ -9,9 +11,12 @@ import com.att.tdp.popcorn_palace.repository.ShowtimeRepository;
 public class ShowtimeService {
 
     private final ShowtimeRepository showtimeRepository;
+
+    private final MovieService movieService;
     
-    public ShowtimeService(ShowtimeRepository showtimeRepository) {
+    public ShowtimeService(ShowtimeRepository showtimeRepository, MovieService movieService) {
         this.showtimeRepository = showtimeRepository;
+        this.movieService = movieService;
     }
 
     public Showtime getShowtimeById(Long id) {
@@ -22,6 +27,9 @@ public class ShowtimeService {
     }
 
     public Showtime addShowtime(Showtime showtime) {
+        Movie movie = showtime.getMovie();
+        if (movie == null || movieService.findByTitle(movie.getTitle()) == null)
+            throw new RuntimeException("The movie " + movie.getTitle() + " not found");
         return showtimeRepository.save(showtime);
     }
 

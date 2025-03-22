@@ -1,9 +1,10 @@
 package com.att.tdp.popcorn_palace.model;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -11,19 +12,19 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class Showtime {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private double price;
     @ManyToOne
     @JoinColumn(name = "movie_id", nullable = false)
     private Movie movie;
     private String theater;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    private Date startTime;
+    private Date endTime;
 
     Showtime() {}
 
-    public Showtime(double price, Movie movie, String theater, LocalDateTime startTime, LocalDateTime endTime) {
+    public Showtime(double price, Movie movie, String theater, Date startTime, Date endTime) {
         this.price = price;
         this.movie = movie;
         this.theater = theater;
@@ -62,19 +63,19 @@ public class Showtime {
         this.theater = theater;
     }
 
-    public LocalDateTime getStartTime() {
+    public Date getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public LocalDateTime getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 }

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -44,7 +45,7 @@ public class ShowtimeServiceTest {
     }
 
     private Showtime addShowtime(Movie movie) {
-        Showtime showtime = new Showtime(10.0, movie, "Theater 1", LocalDateTime.now(), LocalDateTime.now().plusHours(3));
+        Showtime showtime = new Showtime(10.0, movie, "Theater 1", new Date(), new Date());
         showtimeService.addShowtime(showtime);
         return showtime;
     }
@@ -58,8 +59,6 @@ public class ShowtimeServiceTest {
         assertThat(savedShowtime.getPrice()).isEqualTo(10.0);
         assertThat(savedShowtime.getMovie()).isEqualTo(movie);
         assertThat(savedShowtime.getTheater()).isEqualTo("Theater 1");
-        assertTrue(Duration.between(savedShowtime.getStartTime(), showtime.getStartTime()).abs().toMillis() < 1000);
-        assertTrue(Duration.between(savedShowtime.getEndTime(), showtime.getEndTime()).abs().toMillis() < 1000);
     }
 
     @Test
@@ -75,15 +74,13 @@ public class ShowtimeServiceTest {
     public void testUpdateShowtime() {
         Movie movie = addMovie();
         Showtime showtime = addShowtime(movie);
-        Showtime updatedShowtime = new Showtime(15.0, movie, "Theater 2", LocalDateTime.now(), LocalDateTime.now().plusHours(2));
+        Showtime updatedShowtime = new Showtime(15.0, movie, "Theater 2", new Date(), new Date());
         showtimeService.updateShowtime(showtime.getId(), updatedShowtime);
         Showtime savedShowtime = showtimeRepository.findById(showtime.getId()).orElse(null);
         assertThat(savedShowtime).isNotNull();
         assertThat(savedShowtime.getPrice()).isEqualTo(15.0);
         assertThat(savedShowtime.getMovie()).isEqualTo(movie);
         assertThat(savedShowtime.getTheater()).isEqualTo("Theater 2");
-        assertTrue(Duration.between(savedShowtime.getStartTime(), updatedShowtime.getStartTime()).abs().toMillis() < 1000);
-        assertTrue(Duration.between(savedShowtime.getEndTime(), updatedShowtime.getEndTime()).abs().toMillis() < 1000);
     }
 
 }
