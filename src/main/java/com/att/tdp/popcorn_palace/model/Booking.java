@@ -12,7 +12,7 @@ import java.util.UUID;
 public class Booking {
     @Id 
     @GeneratedValue 
-    private Long id;
+    private UUID id;
     @ManyToOne
     @JoinColumn(name = "showtime_id", nullable = false)
     private Showtime showtime;
@@ -27,7 +27,7 @@ public class Booking {
         this.userId = userId;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
