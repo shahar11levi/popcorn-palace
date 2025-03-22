@@ -12,8 +12,9 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class Movie {
     
-    private @Id 
-    @GeneratedValue Long id;
+    @Id 
+    @GeneratedValue 
+    private Long id;
     
     @Column(nullable = false, unique = true)
     private String title;

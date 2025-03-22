@@ -16,25 +16,24 @@ public class Showtime {
     private double price;
     @ManyToOne
     @JoinColumn(name = "movie_id", nullable = false)
-    private Long movieId;
-    public Long getId() {
-        return id;
-    }
-
+    private Movie movie;
     private String theater;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
 
     Showtime() {}
 
-    public Showtime(double price, Long movieId, String theater, LocalDateTime startTime, LocalDateTime endTime) {
+    public Showtime(double price, Movie movie, String theater, LocalDateTime startTime, LocalDateTime endTime) {
         this.price = price;
-        this.movieId = movieId;
+        this.movie = movie;
         this.theater = theater;
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
+    public Long getId() {
+        return id;
+    }
     public void setId(Long id) {
         this.id = id;
     }
@@ -47,12 +46,12 @@ public class Showtime {
         this.price = price;
     }
 
-    public Long getMovieId() {
-        return movieId;
+    public Movie getMovie() {
+        return movie;
     }
 
-    public void setMovieId(Long movieId) {
-        this.movieId = movieId;
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 
     public String getTheater() {
