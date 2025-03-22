@@ -1,13 +1,16 @@
 package com.att.tdp.popcorn_palace.model;
 
 import java.util.Date;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Showtime {
@@ -21,6 +24,10 @@ public class Showtime {
     private String theater;
     private Date startTime;
     private Date endTime;
+
+    @OneToMany(mappedBy = "showtime", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Booking> bookings;
+    
 
     Showtime() {}
 
