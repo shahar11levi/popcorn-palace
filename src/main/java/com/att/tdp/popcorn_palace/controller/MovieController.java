@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import com.att.tdp.popcorn_palace.service.MovieService;
 
@@ -20,7 +21,7 @@ public class MovieController {
     @Autowired
     private MovieService movieService;
 
-    @GetMapping
+    @GetMapping("/all")
     public List<Movie> getAllMovies() {
         return movieService.getAllMovies();
     }
@@ -32,10 +33,11 @@ public class MovieController {
 
     @PostMapping
     public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
+        movieService.addMovie(movie);
         return ResponseEntity.ok(movie);
     }
 
-    @PostMapping("/{movieTitle}")
+    @PutMapping("/{movieTitle}")
     public ResponseEntity<Void> updateMovie(@RequestBody Movie movie, @PathVariable String movieTitle) {
         movieService.updateMovie(movie, movieTitle);
         return ResponseEntity.noContent().build();

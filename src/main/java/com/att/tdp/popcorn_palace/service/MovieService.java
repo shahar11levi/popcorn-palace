@@ -38,7 +38,17 @@ public class MovieService {
     }
 
     public void updateMovie(Movie movie, String movieTitle){
-        
+        Movie movieToUpdate = movieRepository.findByTitle(movieTitle);
+        if (movieToUpdate != null) {
+            movieToUpdate.setTitle(movie.getTitle());
+            movieToUpdate.setGenre(movie.getGenre());
+            movieToUpdate.setDuration(movie.getDuration());
+            movieToUpdate.setRating(movie.getRating());
+            movieToUpdate.setRelease_year(movie.getRelease_year());
+            movieRepository.save(movieToUpdate);
+        } else {
+            throw new RuntimeException("The movie " + movieTitle + " not found");
+        }
     }
 
 }
