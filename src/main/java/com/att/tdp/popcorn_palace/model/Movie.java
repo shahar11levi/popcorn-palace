@@ -15,12 +15,12 @@ public class Movie {
     private String title;
     private String genre;
     private int duration;
-    private int rating;
+    private double rating;
     private int release_year;
 
     Movie() {}
 
-    public Movie(String title, String genre, int duration, int rating, int release_year){
+    public Movie(String title, String genre, int duration, double rating, int release_year){
         this.title = title;
         this.genre = genre;
         this.duration = duration;
@@ -56,11 +56,11 @@ public class Movie {
         this.duration = duration;
     }
 
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 

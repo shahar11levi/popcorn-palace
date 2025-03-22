@@ -62,7 +62,7 @@ public class MovieControllerTest {
         Movie movie = new Movie("The Godfather", "Crime", 175, 9, 1972);
         movieRepository.save(movie);
 
-        Movie updatedMovie = new Movie("The Godfather", "Crime", 175, 10, 1972);
+        Movie updatedMovie = new Movie("The Godfather", "Crime", 175, 9.1, 1972);
         String updatedMovieJson = new ObjectMapper().writeValueAsString(updatedMovie);
 
         this.mockMvc.perform(put("/movies/The Godfather")
@@ -72,7 +72,7 @@ public class MovieControllerTest {
 
         Movie savedMovie = movieRepository.findByTitle("The Godfather");
         assertThat(savedMovie).isNotNull();
-        assertThat(savedMovie.getRating()).isEqualTo(10);
+        assertThat(savedMovie.getRating()).isEqualTo(9.1);
     }
 
     @Test

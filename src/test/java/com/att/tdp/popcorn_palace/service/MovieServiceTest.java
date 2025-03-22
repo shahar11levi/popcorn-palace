@@ -25,13 +25,13 @@ public class MovieServiceTest {
 
     @Test
     public void testAddMovie() {
-        Movie movie = new Movie("The Godfather", "Crime", 175, 9, 1972);
+        Movie movie = new Movie("The Godfather", "Crime", 175, 9.1, 1972);
         movieService.addMovie(movie);
         Movie savedMovie = movieRepository.findByTitle("The Godfather");
         assertThat(savedMovie).isNotNull();
         assertThat(savedMovie.getGenre()).isEqualTo("Crime");
         assertThat(savedMovie.getDuration()).isEqualTo(175);
-        assertThat(savedMovie.getRating()).isEqualTo(9);
+        assertThat(savedMovie.getRating()).isEqualTo(9.1);
         assertThat(savedMovie.getRelease_year()).isEqualTo(1972);
     }
 
