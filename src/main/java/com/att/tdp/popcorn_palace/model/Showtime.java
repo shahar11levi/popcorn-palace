@@ -85,4 +85,14 @@ public class Showtime {
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        Showtime showtime = (Showtime) obj;
+        return id.equals(showtime.id);
+    }
 }
