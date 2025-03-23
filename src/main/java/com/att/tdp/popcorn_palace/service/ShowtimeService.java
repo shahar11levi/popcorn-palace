@@ -70,7 +70,5 @@ public class ShowtimeService {
         }
         return false;
     }
-
-
-
+    
 }

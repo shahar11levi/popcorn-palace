@@ -27,7 +27,6 @@ public class BookingServiceTest {
     private ShowtimeService showtimeService;
     @Autowired
     private MovieService movieService;
-
     @Autowired
     private BookingRepository bookingRepository;
     @Autowired

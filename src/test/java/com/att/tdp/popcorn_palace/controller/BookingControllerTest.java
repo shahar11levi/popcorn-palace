@@ -1,9 +1,8 @@
 package com.att.tdp.popcorn_palace.controller;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.assertj.core.api.Assertions.assertThat;
-
 
 import java.util.Date;
 import java.util.UUID;
@@ -31,7 +30,6 @@ public class BookingControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-
     @Autowired
     private ShowtimeRepository showtimeRepository;
     @Autowired
@@ -78,6 +76,6 @@ public class BookingControllerTest {
         assertThat(savedBooking.getShowtime().getId()).isEqualTo(showtime.getId());
         assertThat(savedBooking.getSeatNumber()).isEqualTo(booking.getSeatNumber());
         assertThat(savedBooking.getUserId()).isEqualTo(userId);
-
     }
+    
 }

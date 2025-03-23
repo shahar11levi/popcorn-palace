@@ -1,11 +1,10 @@
 package com.att.tdp.popcorn_palace.controller;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +23,6 @@ public class MovieControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-
     @Autowired
     private MovieRepository movieRepository;
 
@@ -82,8 +80,5 @@ public class MovieControllerTest {
         this.mockMvc.perform(delete("/movies/The Godfather"))
             .andExpect(status().isOk());
     }
-
-
-
     
 }

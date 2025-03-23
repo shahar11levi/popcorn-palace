@@ -1,11 +1,12 @@
 package com.att.tdp.popcorn_palace.controller;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Date;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -26,21 +27,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class ShowtimeControllerTest {
+
     @Autowired
     private MockMvc mockMvc;
-
     @Autowired
     private ShowtimeRepository showtimeRepository;
-
     @Autowired
     private MovieRepository movieRepository;
-
     @Autowired
     private ShowtimeService showtimeService;
-
     @Autowired
     private MovieService movieService;
-
 
     @BeforeEach
     public void setUp() {
@@ -114,6 +111,5 @@ public class ShowtimeControllerTest {
         
         assertThat(showtimeRepository.findAll()).isEmpty();
     }
-
 
 }

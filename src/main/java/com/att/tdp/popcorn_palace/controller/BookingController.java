@@ -15,6 +15,7 @@ import com.att.tdp.popcorn_palace.service.BookingService;
 @RestController
 @RequestMapping("/bookings")
 public class BookingController {
+
     @Autowired
     private BookingService bookingService;
 
@@ -23,4 +24,5 @@ public class BookingController {
         bookingService.addBooking(booking);
         return ResponseEntity.ok(booking.getId());
     }
+    
 }

@@ -1,10 +1,11 @@
 package com.att.tdp.popcorn_palace.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import static org.assertj.core.api.Assertions.assertThat;
 
 import com.att.tdp.popcorn_palace.model.Movie;
 import com.att.tdp.popcorn_palace.repository.MovieRepository;
@@ -14,7 +15,6 @@ public class MovieServiceTest {
         
     @Autowired
     private MovieService movieService;
-
     @Autowired
     private MovieRepository movieRepository;
 
@@ -58,5 +58,4 @@ public class MovieServiceTest {
         assertThat(savedMovie.getRelease_year()).isEqualTo(1972);
     }
         
-
 }

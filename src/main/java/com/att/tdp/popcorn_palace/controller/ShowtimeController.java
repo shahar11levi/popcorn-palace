@@ -16,6 +16,7 @@ import com.att.tdp.popcorn_palace.service.ShowtimeService;
 @RestController
 @RequestMapping("/showtimes")
 public class ShowtimeController {
+
     @Autowired
     private ShowtimeService showtimeService;
     
@@ -45,7 +46,4 @@ public class ShowtimeController {
         return ResponseEntity.ok().build();
     }
 
-    
-
-    
 }

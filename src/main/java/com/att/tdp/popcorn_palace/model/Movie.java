@@ -11,18 +11,16 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class Movie {
-    
+
     @Id 
     @GeneratedValue 
     private Long id;
-    
     @Column(nullable = false, unique = true)
     private String title;
     private String genre;
     private int duration;
     private double rating;
     private int release_year;
-
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Showtime> showtimes;
 
@@ -89,5 +87,4 @@ public class Movie {
         Movie movie = (Movie) obj;
         return title.equals(movie.title) && id.equals(movie.id);
     }
-    
 }

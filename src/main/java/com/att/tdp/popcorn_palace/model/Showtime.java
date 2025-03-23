@@ -24,11 +24,9 @@ public class Showtime {
     private String theater;
     private Date startTime;
     private Date endTime;
-
     @OneToMany(mappedBy = "showtime", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Booking> bookings;
     
-
     Showtime() {}
 
     public Showtime(double price, Movie movie, String theater, Date startTime, Date endTime) {
