@@ -14,6 +14,7 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class Showtime {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -97,4 +98,5 @@ public class Showtime {
         Showtime showtime = (Showtime) obj;
         return id.equals(showtime.id);
     }
+    
 }

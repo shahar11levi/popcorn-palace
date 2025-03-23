@@ -1,6 +1,7 @@
 package com.att.tdp.popcorn_palace.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Date;
 
@@ -8,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.att.tdp.popcorn_palace.model.Movie;
 import com.att.tdp.popcorn_palace.model.Showtime;
@@ -20,13 +20,10 @@ public class ShowtimeServiceTest {
     
     @Autowired
     private ShowtimeService showtimeService;
-
     @Autowired
     private MovieService movieService;
-
     @Autowired
     private ShowtimeRepository showtimeRepository;
-
     @Autowired
     private MovieRepository movieRepository;
 
