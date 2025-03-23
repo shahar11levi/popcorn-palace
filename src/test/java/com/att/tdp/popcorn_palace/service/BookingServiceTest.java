@@ -1,6 +1,7 @@
 package com.att.tdp.popcorn_palace.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Date;
 import java.util.UUID;
@@ -72,5 +73,16 @@ public class BookingServiceTest {
         assertThat(savedBooking.getUserId()).isEqualTo(userId);
     }
 
+    @Test
+    public void testAddBookingWithSameSeat() {
+        Movie movie = addMovie();
+        Showtime showtime = addShowtime(movie);
+        UUID userId1 = UUID.randomUUID();
+        UUID userId2 = UUID.randomUUID();
+        Booking firstBooking = addBooking(showtime, userId1);
+        Booking secondBooking = new Booking(showtime, firstBooking.getSeatNumber(), userId2);
+        
+        assertThrows(RuntimeException.class, () -> bookingService.addBooking(secondBooking));
+    }
 
 }
