@@ -16,3 +16,11 @@ CREATE TABLE IF NOT EXISTS showtime (
     end_time TIMESTAMP NOT NULL,
     FOREIGN KEY (movie_id) REFERENCES movie(id) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS booking (
+    id UUID PRIMARY KEY,
+    showtime_id INT NOT NULL,
+    seat_number INT NOT NULL,
+    user_id UUID NOT NULL,
+    FOREIGN KEY (showtime_id) REFERENCES showtime(id) ON DELETE CASCADE
+);

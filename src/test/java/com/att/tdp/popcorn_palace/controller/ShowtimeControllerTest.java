@@ -49,7 +49,7 @@ public class ShowtimeControllerTest {
     }
 
     private Movie addMovie() {
-        Movie movie = new Movie("The Godfather", "Crime", 175, 9.1, 1972);
+        Movie movie = new Movie("test movie", "Crime", 175, 9.1, 1972);
         movieService.addMovie(movie);
         return movie;
     }
@@ -65,9 +65,9 @@ public class ShowtimeControllerTest {
         Movie movie = addMovie();
         Showtime showtime = addShowtime(movie);
         this.mockMvc.perform(get("/showtimes/" + showtime.getId())).andExpect(status().isOk())
-                .andExpect(jsonPath("$.price").value(10.0))
-                .andExpect(jsonPath("$.theater").value("Theater 1"))
-                .andExpect(jsonPath("$.movie.title").value("The Godfather"));
+                .andExpect(jsonPath("$.price").value(showtime.getPrice()))
+                .andExpect(jsonPath("$.theater").value(showtime.getTheater()))
+                .andExpect(jsonPath("$.movie.title").value(movie.getTitle()));
     }
 
     @Test
@@ -82,9 +82,9 @@ public class ShowtimeControllerTest {
         
         Showtime savedShowtime = showtimeRepository.findAll().get(0);
         assertThat(savedShowtime).isNotNull();
-        assertThat(savedShowtime.getPrice()).isEqualTo(10.0);
-        assertThat(savedShowtime.getTheater()).isEqualTo("Theater 1");
-        assertThat(savedShowtime.getMovie().getTitle()).isEqualTo("The Godfather");
+        assertThat(savedShowtime.getPrice()).isEqualTo(showtime.getPrice());
+        assertThat(savedShowtime.getTheater()).isEqualTo(showtime.getTheater());
+        assertThat(savedShowtime.getMovie().getTitle()).isEqualTo(showtime.getMovie().getTitle());
     }
 
     @Test
@@ -100,9 +100,9 @@ public class ShowtimeControllerTest {
         
         Showtime savedShowtime = showtimeRepository.findAll().get(0);
         assertThat(savedShowtime).isNotNull();
-        assertThat(savedShowtime.getPrice()).isEqualTo(15.0);
-        assertThat(savedShowtime.getTheater()).isEqualTo("Theater 2");
-        assertThat(savedShowtime.getMovie().getTitle()).isEqualTo("The Godfather");
+        assertThat(savedShowtime.getPrice()).isEqualTo(updatedShowtime.getPrice());
+        assertThat(savedShowtime.getTheater()).isEqualTo(updatedShowtime.getTheater());
+        assertThat(savedShowtime.getMovie().getTitle()).isEqualTo(updatedShowtime.getMovie().getTitle());
     }
 
     @Test

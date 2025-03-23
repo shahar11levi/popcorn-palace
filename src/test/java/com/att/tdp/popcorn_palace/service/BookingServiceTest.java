@@ -42,7 +42,7 @@ public class BookingServiceTest {
     }
 
     private Movie addMovie() {
-        Movie movie = new Movie("The Godfather", "Crime", 175, 9.1, 1972);
+        Movie movie = new Movie("testMovie", "Crime", 175, 9.1, 1972);
         movieService.addMovie(movie);
         return movie;
     }
