@@ -86,6 +86,10 @@ public class Showtime {
         this.endTime = endTime;
     }
 
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
