@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.att.tdp.popcorn_palace.model.Movie;
 import com.att.tdp.popcorn_palace.model.Showtime;
@@ -56,6 +57,14 @@ public class ShowtimeServiceTest {
         assertThat(savedShowtime.getPrice()).isEqualTo(10.0);
         assertThat(savedShowtime.getMovie()).isEqualTo(movie);
         assertThat(savedShowtime.getTheater()).isEqualTo("Theater 1");
+    }
+
+    @Test
+    public void testAddShowtimeWithOverlappingTime() {
+        Movie movie = addMovie();
+        Showtime showtime = addShowtime(movie);
+        Showtime overlappingShowtime = new Showtime(15.0, movie, showtime.getTheater(), showtime.getStartTime(), showtime.getEndTime());
+        assertThrows(RuntimeException.class, () -> showtimeService.addShowtime(overlappingShowtime));
     }
 
     @Test
