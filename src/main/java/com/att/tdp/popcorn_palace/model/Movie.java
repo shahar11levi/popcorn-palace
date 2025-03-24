@@ -20,18 +20,18 @@ public class Movie {
     private String genre;
     private int duration;
     private double rating;
-    private int release_year;
+    private int releaseYear;
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Showtime> showtimes;
 
     Movie() {}
 
-    public Movie(String title, String genre, int duration, double rating, int release_year){
+    public Movie(String title, String genre, int duration, double rating, int releaseYear){
         this.title = title;
         this.genre = genre;
         this.duration = duration;
         this.rating = rating;
-        this.release_year = release_year;
+        this.releaseYear = releaseYear;
     }
 
     public Long getId() {
@@ -70,12 +70,12 @@ public class Movie {
         this.rating = rating;
     }
 
-    public int getRelease_year() {
-        return release_year;
+    public int getReleaseYear() {
+        return releaseYear;
     }
 
-    public void setRelease_year(int release_year) {
-        this.release_year = release_year;
+    public void setReleaseYear(int ReleaseYear) {
+        this.releaseYear = ReleaseYear;
     }
 
     @Override

@@ -1,19 +1,17 @@
 package com.att.tdp.popcorn_palace.dto;
 
-import java.util.Date;
-
 public class ShowtimeDTO {
     
     private Long id;
     private double price;
     private Long movieId;
     private String theater;
-    private Date startTime;
-    private Date endTime;
+    private String startTime;
+    private String endTime;
 
     public ShowtimeDTO() {}
 
-    public ShowtimeDTO(Long id, double price, Long movieId, String theater, Date startTime, Date endTime) {
+    public ShowtimeDTO(Long id, double price, Long movieId, String theater, String startTime, String endTime) {
         this.id = id;
         this.price = price;
         this.movieId = movieId;
@@ -54,19 +52,19 @@ public class ShowtimeDTO {
         this.theater = theater;
     }
 
-    public Date getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
     

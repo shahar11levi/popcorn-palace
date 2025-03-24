@@ -1,5 +1,7 @@
 package com.att.tdp.popcorn_palace.service;
 
+import java.time.LocalDateTime;
+
 import org.springframework.stereotype.Service;
 
 import com.att.tdp.popcorn_palace.model.Movie;
@@ -32,7 +34,7 @@ public class ShowtimeService {
         Movie movie = showtime.getMovie();
         if (movie == null || movieService.findByTitle(movie.getTitle()) == null)
             throw new RuntimeException("The movie " + movie.getTitle() + " not found");
-        if (showtime.getStartTime().after(showtime.getEndTime()))
+        if (LocalDateTime.parse(showtime.getStartTime()).isAfter(LocalDateTime.parse((showtime.getEndTime()))))
             throw new RuntimeException("The start time must be before the end time");
         if (isTheaterOccupied(showtime))
             throw new RuntimeException("The theater is already occupied");
@@ -64,7 +66,7 @@ public class ShowtimeService {
     private boolean isTheaterOccupied(Showtime showtime) {
         for (Showtime s : showtimeRepository.findAll()) {
             if (s.getTheater().equals(showtime.getTheater())) {
-                if (! (s.getStartTime().after(showtime.getEndTime()) || s.getEndTime().before(showtime.getStartTime())))
+                if (! (LocalDateTime.parse(s.getStartTime()).isAfter(LocalDateTime.parse(showtime.getEndTime())) || LocalDateTime.parse(s.getEndTime()).isBefore(LocalDateTime.parse(showtime.getStartTime()))))
                     return true;
             }
         }

@@ -48,10 +48,10 @@ public class MovieControllerTest {
 
         Movie savedMovie = movieRepository.findByTitle("The Godfather");
         assertThat(savedMovie).isNotNull();
-        assertThat(savedMovie.getGenre()).isEqualTo("Crime");
-        assertThat(savedMovie.getDuration()).isEqualTo(175);
-        assertThat(savedMovie.getRating()).isEqualTo(9);
-        assertThat(savedMovie.getRelease_year()).isEqualTo(1972);
+        assertThat(savedMovie.getGenre()).isEqualTo(movie.getGenre());
+        assertThat(savedMovie.getDuration()).isEqualTo(movie.getDuration());
+        assertThat(savedMovie.getRating()).isEqualTo(movie.getRating());
+        assertThat(savedMovie.getReleaseYear()).isEqualTo(movie.getReleaseYear());
     }
 
     @Test
@@ -69,7 +69,11 @@ public class MovieControllerTest {
 
         Movie savedMovie = movieRepository.findByTitle(movie.getTitle());
         assertThat(savedMovie).isNotNull();
-        assertThat(savedMovie.getRating()).isEqualTo(9.1);
+        assertThat(savedMovie.getGenre()).isEqualTo(updatedMovie.getGenre());
+        assertThat(savedMovie.getDuration()).isEqualTo(updatedMovie.getDuration());
+        assertThat(savedMovie.getRating()).isEqualTo(updatedMovie.getRating());
+        assertThat(savedMovie.getReleaseYear()).isEqualTo(updatedMovie.getReleaseYear());
+
     }
 
     @Test
@@ -79,6 +83,8 @@ public class MovieControllerTest {
 
         this.mockMvc.perform(delete("/movies/The Godfather"))
             .andExpect(status().isOk());
+
+        assertThat(movieRepository.findById(movie.getId()).isEmpty());
     }
     
 }

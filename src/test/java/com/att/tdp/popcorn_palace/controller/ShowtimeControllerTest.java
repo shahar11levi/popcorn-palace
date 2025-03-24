@@ -7,7 +7,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -52,7 +52,7 @@ public class ShowtimeControllerTest {
     }
 
     private Showtime addShowtime(Movie movie) {
-        Showtime showtime = new Showtime(10.0, movie, "Theater 1", new Date(), new Date());
+        Showtime showtime = new Showtime(10.0, movie, "Theater 1", LocalDateTime.now().toString(), LocalDateTime.now().toString());
         showtimeService.addShowtime(showtime);
         return showtime;
     }
@@ -70,7 +70,7 @@ public class ShowtimeControllerTest {
     @Test
     public void testAddShowtime() throws Exception {
         Movie movie = addMovie();
-        Showtime showtime = new Showtime(10.0, movie, "Theater 1", new Date(), new Date());
+        Showtime showtime = new Showtime(10.0, movie, "Theater 1", LocalDateTime.now().toString(), LocalDateTime.now().toString());
         String showtimeJson = new ObjectMapper().writeValueAsString(showtime);
         this.mockMvc.perform(post("/showtimes")
             .contentType("application/json")
@@ -88,7 +88,7 @@ public class ShowtimeControllerTest {
     public void testUpdateShowtime() throws Exception {
         Movie movie = addMovie();
         Showtime showtime = addShowtime(movie);
-        Showtime updatedShowtime = new Showtime(15.0, movie, "Theater 2", new Date(), new Date());
+        Showtime updatedShowtime = new Showtime(15.0, movie, "Theater 2", LocalDateTime.now().toString(), LocalDateTime.now().toString());
         String showtimeJson = new ObjectMapper().writeValueAsString(updatedShowtime);
         this.mockMvc.perform(post("/showtimes/update/" + showtime.getId())
             .contentType("application/json")

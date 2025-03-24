@@ -3,6 +3,7 @@ package com.att.tdp.popcorn_palace.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
@@ -48,7 +49,7 @@ public class BookingServiceTest {
     }
 
     private Showtime addShowtime(Movie movie) {
-        Showtime showtime = new Showtime(10.0, movie, "Theater 1", new Date(), new Date());
+        Showtime showtime = new Showtime(10.0, movie, "Theater 1", LocalDateTime.now().toString(), LocalDateTime.now().toString());
         showtimeService.addShowtime(showtime);
         return showtime;
     }
@@ -67,9 +68,9 @@ public class BookingServiceTest {
         Booking booking = addBooking(showtime, userId);
         Booking savedBooking = bookingRepository.findById(booking.getId()).orElse(null);
         assertThat(savedBooking).isNotNull();
-        assertThat(savedBooking.getShowtime()).isEqualTo(showtime);
-        assertThat(savedBooking.getSeatNumber()).isEqualTo(10);
-        assertThat(savedBooking.getUserId()).isEqualTo(userId);
+        assertThat(savedBooking.getShowtime()).isEqualTo(booking.getShowtime());
+        assertThat(savedBooking.getSeatNumber()).isEqualTo(booking.getSeatNumber());
+        assertThat(savedBooking.getUserId()).isEqualTo(booking.getUserId());
     }
 
     @Test

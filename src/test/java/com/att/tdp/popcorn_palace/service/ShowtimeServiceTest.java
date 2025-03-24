@@ -3,6 +3,7 @@ package com.att.tdp.popcorn_palace.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -40,7 +41,7 @@ public class ShowtimeServiceTest {
     }
 
     private Showtime addShowtime(Movie movie) {
-        Showtime showtime = new Showtime(10.0, movie, "Theater 1", new Date(), new Date());
+        Showtime showtime = new Showtime(10.0, movie, "Theater 1", LocalDateTime.now().toString(), LocalDateTime.now().plusMinutes(90).toString());
         showtimeService.addShowtime(showtime);
         return showtime;
     }
@@ -51,16 +52,19 @@ public class ShowtimeServiceTest {
         Showtime showtime = addShowtime(movie);
         Showtime savedShowtime = showtimeRepository.findById(showtime.getId()).orElse(null);
         assertThat(savedShowtime).isNotNull();
-        assertThat(savedShowtime.getPrice()).isEqualTo(10.0);
-        assertThat(savedShowtime.getMovie()).isEqualTo(movie);
-        assertThat(savedShowtime.getTheater()).isEqualTo("Theater 1");
+        assertThat(savedShowtime.getId()).isNotNull();
+        assertThat(savedShowtime.getPrice()).isEqualTo(showtime.getPrice());
+        assertThat(savedShowtime.getMovie()).isEqualTo(showtime.getMovie());
+        assertThat(savedShowtime.getTheater()).isEqualTo(showtime.getTheater());
     }
 
     @Test
     public void testAddShowtimeWithOverlappingTime() {
         Movie movie = addMovie();
         Showtime showtime = addShowtime(movie);
-        Showtime overlappingShowtime = new Showtime(15.0, movie, showtime.getTheater(), showtime.getStartTime(), showtime.getEndTime());
+        LocalDateTime newStartTime = LocalDateTime.parse(showtime.getStartTime()).plusMinutes(30);
+        LocalDateTime newEndTime = LocalDateTime.parse(showtime.getEndTime()).minusMinutes(30);
+        Showtime overlappingShowtime = new Showtime(15.0, movie, showtime.getTheater(), newStartTime.toString(), newEndTime.toString());
         assertThrows(RuntimeException.class, () -> showtimeService.addShowtime(overlappingShowtime));
     }
 
@@ -77,13 +81,13 @@ public class ShowtimeServiceTest {
     public void testUpdateShowtime() {
         Movie movie = addMovie();
         Showtime showtime = addShowtime(movie);
-        Showtime updatedShowtime = new Showtime(15.0, movie, "Theater 2", new Date(), new Date());
+        Showtime updatedShowtime = new Showtime(15.0, movie, "Theater 2", LocalDateTime.now().toString(), LocalDateTime.now().plusMinutes(90).toString());
         showtimeService.updateShowtime(showtime.getId(), updatedShowtime);
         Showtime savedShowtime = showtimeRepository.findById(showtime.getId()).orElse(null);
         assertThat(savedShowtime).isNotNull();
-        assertThat(savedShowtime.getPrice()).isEqualTo(15.0);
-        assertThat(savedShowtime.getMovie()).isEqualTo(movie);
-        assertThat(savedShowtime.getTheater()).isEqualTo("Theater 2");
+        assertThat(savedShowtime.getPrice()).isEqualTo(updatedShowtime.getPrice());
+        assertThat(savedShowtime.getMovie()).isEqualTo(updatedShowtime.getMovie());
+        assertThat(savedShowtime.getTheater()).isEqualTo(updatedShowtime.getTheater());
     }
 
 }

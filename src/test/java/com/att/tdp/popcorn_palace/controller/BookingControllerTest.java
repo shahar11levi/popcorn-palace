@@ -1,10 +1,11 @@
 package com.att.tdp.popcorn_palace.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -55,7 +56,7 @@ public class BookingControllerTest {
     }
 
     private Showtime addShowtime(Movie movie) {
-        Showtime showtime = new Showtime(10.0, movie, "Theater 1", new Date(), new Date());
+        Showtime showtime = new Showtime(10.0, movie, "Theater 1", LocalDateTime.now().toString(), LocalDateTime.now().toString());
         showtimeService.addShowtime(showtime);
         return showtime;
     }
@@ -73,6 +74,7 @@ public class BookingControllerTest {
             .andExpect(status().isOk());
         
         Booking savedBooking = bookingRepository.findAll().get(0);
+        assertNotNull(savedBooking.getId());
         assertThat(savedBooking.getShowtime().getId()).isEqualTo(showtime.getId());
         assertThat(savedBooking.getSeatNumber()).isEqualTo(booking.getSeatNumber());
         assertThat(savedBooking.getUserId()).isEqualTo(userId);

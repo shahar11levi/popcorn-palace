@@ -44,7 +44,7 @@ public class MovieService {
             movieToUpdate.setGenre(movie.getGenre());
             movieToUpdate.setDuration(movie.getDuration());
             movieToUpdate.setRating(movie.getRating());
-            movieToUpdate.setRelease_year(movie.getRelease_year());
+            movieToUpdate.setReleaseYear(movie.getReleaseYear());
             movieRepository.save(movieToUpdate);
         } else {
             throw new RuntimeException("The movie " + movieTitle + " not found");

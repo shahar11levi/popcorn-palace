@@ -1,7 +1,7 @@
 package com.att.tdp.popcorn_palace.model;
 
-import java.util.Date;
 import java.util.List;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -23,14 +23,14 @@ public class Showtime {
     @JoinColumn(name = "movie_id", nullable = false)
     private Movie movie;
     private String theater;
-    private Date startTime;
-    private Date endTime;
+    private String startTime;
+    private String endTime;
     @OneToMany(mappedBy = "showtime", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Booking> bookings;
     
     Showtime() {}
 
-    public Showtime(double price, Movie movie, String theater, Date startTime, Date endTime) {
+    public Showtime(double price, Movie movie, String theater, String startTime, String endTime) {
         this.price = price;
         this.movie = movie;
         this.theater = theater;
@@ -69,19 +69,19 @@ public class Showtime {
         this.theater = theater;
     }
 
-    public Date getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
