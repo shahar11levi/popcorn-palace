@@ -22,6 +22,12 @@ public class MovieService {
     }
 
     public Movie addMovie(Movie movie) {
+        if (movie.getTitle() == null)
+            throw new RuntimeException("The movie title is required");
+        if (movie.getDuration() < 0)
+            throw new RuntimeException("The movie duration must be positive");
+        if (movie.getRating() < 0 || movie.getRating() > 10)
+            throw new RuntimeException("The movie rating must be between 0 and 10");
         return movieRepository.save(movie);
     }
 
@@ -38,6 +44,13 @@ public class MovieService {
     }
 
     public void updateMovie(Movie movie, String movieTitle){
+        if (movie.getTitle() == null)
+            throw new RuntimeException("The movie title is required");
+        if (movie.getDuration() < 0)
+            throw new RuntimeException("The movie duration must be positive");
+        if (movie.getRating() < 0 || movie.getRating() > 10)
+            throw new RuntimeException("The movie rating must be between 0 and 10");
+
         Movie movieToUpdate = movieRepository.findByTitle(movieTitle);
         if (movieToUpdate != null) {
             movieToUpdate.setTitle(movie.getTitle());

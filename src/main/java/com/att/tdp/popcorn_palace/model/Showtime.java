@@ -28,7 +28,7 @@ public class Showtime {
     @OneToMany(mappedBy = "showtime", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Booking> bookings;
     
-    Showtime() {}
+    public Showtime() {}
 
     public Showtime(double price, Movie movie, String theater, String startTime, String endTime) {
         this.price = price;

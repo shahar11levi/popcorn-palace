@@ -51,6 +51,8 @@ public class ShowtimeService {
 
     public void updateShowtime(Long id, Showtime showtime) {
         Showtime showtimeToUpdate = showtimeRepository.findById(id).orElse(null);
+        if (isTheaterOccupied(showtime))
+            throw new RuntimeException("The theater is already occupied");
         if (showtimeToUpdate != null) {
             showtimeToUpdate.setPrice(showtime.getPrice());
             showtimeToUpdate.setMovie(showtime.getMovie());
@@ -65,7 +67,7 @@ public class ShowtimeService {
 
     private boolean isTheaterOccupied(Showtime showtime) {
         for (Showtime s : showtimeRepository.findAll()) {
-            if (s.getTheater().equals(showtime.getTheater())) {
+            if (s.getTheater().equals(showtime.getTheater()) && ! s.getId().equals(showtime.getId())) {
                 if (! (LocalDateTime.parse(s.getStartTime()).isAfter(LocalDateTime.parse(showtime.getEndTime())) || LocalDateTime.parse(s.getEndTime()).isBefore(LocalDateTime.parse(showtime.getStartTime()))))
                     return true;
             }

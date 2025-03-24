@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.UUID;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -83,6 +82,25 @@ public class BookingServiceTest {
         Booking secondBooking = new Booking(showtime, firstBooking.getSeatNumber(), userId2);
         
         assertThrows(RuntimeException.class, () -> bookingService.addBooking(secondBooking));
+    }
+
+    @Test
+    public void testAddBookingWithInvalidSeat() {
+        Movie movie = addMovie();
+        Showtime showtime = addShowtime(movie);
+        UUID userId = UUID.randomUUID();
+        Booking booking = new Booking(showtime, -1, userId);
+        
+        assertThrows(RuntimeException.class, () -> bookingService.addBooking(booking));
+    }
+
+    @Test
+    public void testAddBookingWithInvalidShowtime() {
+        UUID userId = UUID.randomUUID();
+        Showtime showtime = new Showtime();
+        Booking booking = new Booking(showtime, 10, userId);
+        
+        assertThrows(RuntimeException.class, () -> bookingService.addBooking(booking));
     }
 
 }

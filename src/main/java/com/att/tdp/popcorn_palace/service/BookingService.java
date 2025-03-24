@@ -27,6 +27,8 @@ public class BookingService {
         Showtime showtime  = booking.getShowtime();
         if (showtime == null || showtimeService.getShowtimeById(showtime.getId()) == null)
             throw new RuntimeException("The showtime " + showtime.getId() + " not found");
+        if (booking.getSeatNumber() < 1)
+            throw new RuntimeException("The seat number must be greater than 0");
         if (!checkSeatAvailability(showtime, booking.getSeatNumber()))
             throw new RuntimeException("The seat " + booking.getSeatNumber() + " is not available");
         return bookingRepository.save(booking);
