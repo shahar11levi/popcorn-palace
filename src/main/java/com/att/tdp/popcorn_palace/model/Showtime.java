@@ -1,7 +1,6 @@
 package com.att.tdp.popcorn_palace.model;
 
 import java.util.List;
-import java.time.LocalDateTime;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
