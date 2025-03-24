@@ -62,9 +62,9 @@ public class ShowtimeControllerTest {
         Movie movie = addMovie();
         Showtime showtime = addShowtime(movie);
         this.mockMvc.perform(get("/showtimes/" + showtime.getId())).andExpect(status().isOk())
-                .andExpect(jsonPath("$.price").value(showtime.getPrice()))
-                .andExpect(jsonPath("$.theater").value(showtime.getTheater()))
-                .andExpect(jsonPath("$.movie.title").value(movie.getTitle()));
+            .andExpect(jsonPath("$.price").value(showtime.getPrice()))
+            .andExpect(jsonPath("$.theater").value(showtime.getTheater()))
+            .andExpect(jsonPath("$.movieId").value(movie.getId()));
     }
 
     @Test
